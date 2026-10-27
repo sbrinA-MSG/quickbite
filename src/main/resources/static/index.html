@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QuickBite – Checkout</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <main>
+    <header>
+      <h1>QuickBite</h1>
+      <p>Isi keranjang, lalu bayar.</p>
+    </header>
+
+    <div class="layout">
+      <form id="form" novalidate>
+        <fieldset>
+          <legend>Pembeli</legend>
+          <div class="field">
+            <label for="idPelanggan">ID pelanggan</label>
+            <input id="idPelanggan" name="idPelanggan" value="P-01" autocomplete="off" required>
+          </div>
+          <div class="field">
+            <label for="tokenKartu">Token kartu</label>
+            <input id="tokenKartu" name="tokenKartu" value="tok_123" autocomplete="off" required>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Keranjang</legend>
+          <div id="cart"></div>
+          <button type="button" class="add" id="add">Tambah menu</button>
+        </fieldset>
+
+        <button type="submit" class="primary" id="submit">Bayar sekarang</button>
+        <p class="hint">Data contoh: pelanggan P-01, menu M-01 dan M-02.</p>
+      </form>
+
+      <aside class="receipt" id="receipt" aria-live="polite" aria-label="Hasil checkout">
+        <h2>STRUK</h2>
+        <p class="empty">Belum ada pesanan. Hasil checkout muncul di sini.</p>
+      </aside>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

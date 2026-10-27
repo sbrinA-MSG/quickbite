@@ -1,0 +1,16 @@
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/quickbite?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Jakarta
+    username: quickbite
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true
+
+quickbite:
+  payment:
+    base-url: ${PAYMENT_BASE_URL:https://api.midtrans.com}
