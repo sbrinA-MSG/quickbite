@@ -3,48 +3,177 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>QuickBite – Checkout</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#FFF7FA">
+  <title>QuickBite – Pesan & Bayar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+  <!-- Set ikon (stroke konsisten 1.8, ujung bulat) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="qbGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#F7A8C4" />
+        <stop offset="1" stop-color="#A8D8F0" />
+      </linearGradient>
+    </defs>
+    <symbol id="i-search" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="6.5" />
+      <path d="m20 20-3.8-3.8" />
+    </symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24">
+      <path d="M5 8h14l-1 11.2a1.5 1.5 0 0 1-1.5 1.3h-9A1.5 1.5 0 0 1 6 19.2z" />
+      <path d="M9 8V7a3 3 0 0 1 6 0v1" />
+    </symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24">
+      <path d="M12 5v14M5 12h14" />
+    </symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24">
+      <path d="M5 12h14" />
+    </symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24">
+      <path d="M4.5 7h15M10 7V5h4v2M7 7l.8 12h8.4L17 7" />
+    </symbol>
+    <symbol id="i-close" viewBox="0 0 24 24">
+      <path d="M6 6l12 12M18 6 6 18" />
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24">
+      <path d="m5 12.5 4.5 4.5L19 7.5" />
+    </symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M12 8v4.5M12 16h.01" />
+    </symbol>
+    <symbol id="i-user" viewBox="0 0 24 24">
+      <circle cx="12" cy="8.5" r="3.5" />
+      <path d="M5 20c.6-3.6 3.4-5.5 7-5.5s6.4 1.9 7 5.5" />
+    </symbol>
+    <symbol id="i-card" viewBox="0 0 24 24">
+      <rect x="3.5" y="6" width="17" height="12" rx="3" />
+      <path d="M3.5 10.5h17M7 15h3" />
+    </symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24">
+      <path d="M12 4v4M12 16v4M4 12h4M16 12h4M7 7l2 2M15 15l2 2M17 7l-2 2M9 15l-2 2" />
+    </symbol>
+  </svg>
+
+  <header class="nav">
+    <div class="nav-in">
+      <a class="logo" href="/" aria-label="QuickBite, beranda">
+        <svg class="logo-mark" viewBox="0 0 40 40" aria-hidden="true">
+          <rect width="40" height="40" rx="13" fill="url(#qbGrad)" />
+          <path d="M20 9.5a10.5 10.5 0 1 0 10.2 13 4.2 4.2 0 0 1-5.2-5.2A4.2 4.2 0 0 1 20 9.5z" fill="#fff" />
+          <circle cx="16.5" cy="19" r="1.4" fill="#244B70" />
+          <circle cx="21" cy="24.5" r="1.4" fill="#244B70" />
+        </svg>
+        <span class="logo-word">Quick<span>Bite</span></span>
+      </a>
+      <button type="button" class="cart-btn" id="openCart" aria-label="Buka keranjang">
+        <svg class="ico">
+          <use href="#i-bag" />
+        </svg>
+        <span class="cart-label">Keranjang</span>
+        <span class="count" id="count" aria-hidden="true">0</span>
+      </button>
+    </div>
+  </header>
+
   <main>
-    <header>
-      <h1>QuickBite</h1>
-      <p>Isi keranjang, lalu bayar.</p>
-    </header>
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero-copy">
+        <span class="pill">Menu hari ini</span>
+        <h1 id="heroTitle">Lapar? Pilih menu, bayar, selesai.</h1>
+        <p>Masukkan pesanan ke keranjang dan checkout dalam satu halaman.</p>
+        <label class="search" for="q">
+          <svg class="ico">
+            <use href="#i-search" />
+          </svg>
+          <input id="q" type="search" placeholder="Cari nasi goreng, es teh…" autocomplete="off">
+        </label>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
+      </div>
+    </section>
 
     <div class="layout">
-      <form id="form" novalidate>
-        <fieldset>
-          <legend>Pembeli</legend>
-          <div class="field">
-            <label for="idPelanggan">ID pelanggan</label>
-            <input id="idPelanggan" name="idPelanggan" value="P-01" autocomplete="off" required>
+      <section aria-labelledby="menuTitle">
+        <div class="section-head">
+          <h2 id="menuTitle">Menu</h2>
+          <div class="chips" id="chips" role="group" aria-label="Kategori menu"></div>
+        </div>
+        <div class="grid" id="menu"></div>
+      </section>
+
+      <div class="backdrop" id="backdrop"></div>
+      <aside class="panel" id="panel" aria-label="Keranjang dan checkout">
+        <div class="panel-head">
+          <h2>Keranjang</h2>
+          <button type="button" class="icon-btn only-mobile" id="closeCart" aria-label="Tutup keranjang">
+            <svg class="ico">
+              <use href="#i-close" />
+            </svg>
+          </button>
+        </div>
+
+        <form id="form" novalidate>
+          <div id="cart" class="cart"></div>
+
+          <div class="manual">
+            <label for="manualId">Kode menu lain</label>
+            <div class="manual-row">
+              <input id="manualId" placeholder="mis. M-03" autocomplete="off">
+              <button type="button" class="ghost" id="add">Tambah</button>
+            </div>
           </div>
-          <div class="field">
-            <label for="tokenKartu">Token kartu</label>
-            <input id="tokenKartu" name="tokenKartu" value="tok_123" autocomplete="off" required>
-          </div>
-        </fieldset>
 
-        <fieldset>
-          <legend>Keranjang</legend>
-          <div id="cart"></div>
-          <button type="button" class="add" id="add">Tambah menu</button>
-        </fieldset>
+          <fieldset>
+            <legend>Pembeli</legend>
+            <div class="field">
+              <label for="idPelanggan">ID pelanggan</label>
+              <div class="input-ico"><svg class="ico">
+                  <use href="#i-user" />
+                </svg>
+                <input id="idPelanggan" name="idPelanggan" value="P-01" autocomplete="off" required>
+              </div>
+            </div>
+            <div class="field">
+              <label for="tokenKartu">Token kartu</label>
+              <div class="input-ico"><svg class="ico">
+                  <use href="#i-card" />
+                </svg>
+                <input id="tokenKartu" name="tokenKartu" value="tok_123" autocomplete="off" required>
+              </div>
+            </div>
+          </fieldset>
 
-        <button type="submit" class="primary" id="submit">Bayar sekarang</button>
-        <p class="hint">Data contoh: pelanggan P-01, menu M-01 dan M-02.</p>
-      </form>
+          <div class="summary" id="summary" aria-live="polite"></div>
+          <button type="submit" class="primary" id="submit">Bayar sekarang</button>
+          <p class="hint">Data contoh: pelanggan P-01, menu M-01 dan M-02.</p>
+        </form>
 
-      <aside class="receipt" id="receipt" aria-live="polite" aria-label="Hasil checkout">
-        <h2>STRUK</h2>
-        <p class="empty">Belum ada pesanan. Hasil checkout muncul di sini.</p>
+        <div class="receipt" id="receipt" aria-live="polite" aria-label="Hasil checkout">
+          <h2>Struk</h2>
+          <p class="empty">Belum ada pesanan. Hasil checkout muncul di sini.</p>
+        </div>
       </aside>
     </div>
   </main>
+
+  <button type="button" class="mbar" id="mbar">
+    <span class="mbar-l"><svg class="ico">
+        <use href="#i-bag" />
+      </svg><span id="mbarCount">0 item</span></span>
+    <span id="mbarTotal">Rp0</span>
+  </button>
+
+  <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
 
   <script src="app.js"></script>
 </body>
